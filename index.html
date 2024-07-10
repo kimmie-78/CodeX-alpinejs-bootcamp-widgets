@@ -4,60 +4,111 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="//unpkg.com/alpinejs" defer></script>
+    <script src="index.js"></script>
+    <script src="phonebill.js" ></script>
+    <script src="wordgame.js"></script>
+    <script src="airtime.js"></script>
     <style>
-    body {
-        background: #A7C7E7;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        margin: 0;
-    }
-
-    .wrapper {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        width: 510px;
-        background: #fff;
-        border-radius: 10px;
-        box-shadow: 0 10px 25px rgb(20, 52, 164);
-        padding: 20px;
-    }
-
-    .wrapper h1 {
-        font-size: 42px;
-        font-weight: 500;
-        margin: 30px 0;
-    }
-
-    .button-container {
-        display: flex;
-        gap: 10px;
-        margin-top: 20px;
-    }
-
-    .button {
-        padding: 10px 20px;
-        background-color: #191970;
-        color: #fff;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-    }
-
-    .button:hover {
-        background-color: #4682B4;
-    }
-</style>
+        body {
+            background: #A7C7E7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .wrapper {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 510px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgb(20, 52, 164);
+            padding: 20px;
+        }
+        .wrapper h1 {
+            font-size: 42px;
+            font-weight: 500;
+            margin: 30px 0;
+        }
+        .button-container {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .button {
+            padding: 10px 20px;
+            background-color: #191970;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .button:hover {
+            background-color: #4682B4;
+        }
+    </style>
 </head>
 <body>
     <div class="wrapper">
-        apple
+        <div x-data="transportFeeCalculator()">
+            <h1>Select your shift</h1>
+            <div>
+                <label>
+                    <input type="radio" name="shift" value="morning" x-model="shift">
+                    Morning
+                </label>
+            </div>
+            <div>
+                <label>
+                    <input type="radio" name="shift" value="afternoon" x-model="shift">
+                    Afternoon
+                </label>
+            </div>
+            <div>
+                <label>
+                    <input type="radio" name="shift" value="nightshift" x-model="shift">
+                    Night Shift
+                </label>
+            </div>
+            <div>
+                <h2>Transport Fee: <span x-text="transportFee(shift)"></span></h2>
+            </div>
+        </div>
+        <br>
+        <br>
+        <h1>Phone Bill Calculator</h1>
+        <p>Enter the SMS or Call</p>
+        <input type="text" id="phoneString" placeholder="Enter calls and SMS separated by commas">
+        <button class="button" onclick="calculateBill()">Calculate Bill</button>
+        <h2>Total Bill: <span id="totalBill"></span></h2>
+        <br>
+        <br>
+        <br>
+        <h1>Analyze the sentence</h1>
+        <input type="text" id="sentenceInput" placeholder="Enter a sentence">
+        <br>
+        <button class="button" onclick="analyzeSentence()">Analyze Sentence</button>
+        <br>
+        <div class="results">
+            <div class="result-item" id="longestWord">Longest Word: </div>
+            <div class="result-item" id="shortestWord">Shortest Word: </div>
+            <div class="result-item" id="wordLengths">Total Length of Words: </div>
+        </div>
+        <br>
+        <br>
+        <br>
+        <h1>Airtime Usage Calculator</h1>
+        <input type="text" id="usageInput" placeholder="Enter usage (e.g. call,data,sms)">
+        <input type="number" id="airtimeInput" placeholder="Enter available airtime">
+        <button class="button" onclick="calculateAirtime()">Calculate</button>
+        <div class="results">
+            <div class="result-item" id="remainingAirtime">Remaining Airtime: </div>
+        </div>
     </div>
-    <script src="//unpkg.com/alpinejs" defer></script>
-   
+    
 </body>
-
 </html>
